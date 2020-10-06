@@ -1,0 +1,13 @@
+.class_name
+{
+    border-color: aqua;
+    border-bottom-style: groove;
+}
+
+input[type=text]:focus
+{
+    
+   
+     color:coral; 
+    border-bottom-color: chartreuse;
+}

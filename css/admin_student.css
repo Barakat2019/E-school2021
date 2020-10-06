@@ -1,0 +1,79 @@
+
+label.control-label
+{
+    color:#000;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.content-agileits
+{
+    width: 67%;
+    margin:3em auto;
+    
+}
+.background
+{
+    background-image: url('../image/student-2.jpg');
+    width: 1290px;
+    height: 1280px;
+}
+h1.title
+{
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    padding-top: 0.5em;
+    padding-right: 0px;
+    padding-bottom: 0.5em;
+    padding-left: 0px;
+    color:#fff;
+    background:rgba(0,0,0.4);
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    background-image: none;
+    background-size: auto;
+    background-origin: padding-box;
+    background-clip: border-box;
+    text-transform: uppercase;
+
+}
+
+.left
+{
+    width: 50%;
+    float: left;
+    padding:2em;
+    background:#fff;
+    position: relative;
+    top: 48px;
+}
+
+.right
+{
+    float: left;
+    width: 50%;
+    background-color: rgba(0,0,0,0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-image: url('../image/student-1.jpg');
+    background-origin: padding-box;
+    background-clip: border-box;
+    min-height: 663px;
+    background-size: cover;
+}
+.clear
+{
+    clear:both;
+}
+.error
+{
+    color:red;
+}
+
+ 
