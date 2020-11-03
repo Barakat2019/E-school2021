@@ -16,9 +16,9 @@ a{color:inherit;text-decoration:none}
 	width:100%;
 	margin:auto;
 	max-width:525px;
-	min-height:670px;
+	min-height:775px;
 	position:relative;
-	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	background:url(../image/form-driver1.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
 .login-html{
@@ -47,9 +47,8 @@ a{color:inherit;text-decoration:none}
 
 .login-html .tab{
 	font-size:22px;
-	margin-right:15px;
-	padding-bottom:5px;
-	margin:0 15px 10px 0;
+	padding-bottom:0px;
+	margin:0 15px 2px 0;
 	display:inline-block;
 	border-bottom:2px solid transparent;
 }

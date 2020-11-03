@@ -1,11 +1,25 @@
 <?php
 require_once('../PHP_CODE/Manager.php');
 include_once('../Pages/Nav-Bar.php');
- ?>
+ 
+//Add student id to select
+global $conn;
+$select_student="select student_id from student";
+$result=$conn->query($select_student);
+
+//This for class  in Add sction tab
+$select_class="select class_id,class_name from class";
+$result_class1=$conn->query($select_class);
+
+
+
+
+
+?>
  <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Manager-<?php echo "Manager"; ?></title>
+  <title>E-school</title>
 </head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +28,23 @@ include_once('../Pages/Nav-Bar.php');
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="http://localhost/E-School/css/admin_student.css">
     <link rel="stylesheet" href="http://localhost/E-School/css/add_driver.css">
-
+    <link rel="stylesheet" href="http://localhost/E-School/css/admin_parent.css">
     <link rel="stylesheet" href="http://localhost/E-School/css/admin.css">
     <link rel="stylesheet" href="http://localhost/E-School/css/navigation-bar/style.css">
   <link rel="stylesheet" href="http://localhost/E-School/css/admin_class.css">
 
- 
+  <!-- icon font css-->
+  <link rel="stylesheet" href="http://localhost/E-School/vendor/mdi-font/css/material-design-iconic-font.min.css" media="all">
+  <link href="http://localhost/E-School/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="http://localhost/E-School/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="http://localhost/E-School/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+  
+  
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -47,12 +72,7 @@ $(function(){
   <li class="nav-item" role="presentation">
     <a class="nav-link active" id="man-tab" data-toggle="tab" href="#manager" role="tab" aria-controls="home" aria-selected="true">Manager</a>
   </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="teacher-tab" data-toggle="tab" href="#teacher" role="tab" aria-controls="profile" aria-selected="false">Teacher</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="student-tab" data-toggle="tab" href="#student" role="tab" aria-controls="contact" aria-selected="false">Student</a>
-  </li>
+  
 </ul>
 
 
@@ -63,11 +83,12 @@ $(function(){
       <div class="col-2">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-class-tab" data-toggle="pill" href="#v-pills-class" role="tab" aria-controls="v-pills-home" aria-selected="true">Add Class</a>
+          <a class="nav-link" id="v-pills-section-tab" data-toggle="pill" href="#v-pills-section" role="tab" aria-controls="v-pills-section" aria-selected="false">Add Section</a>
           <a class="nav-link" id="v-pills-teacher-tab" data-toggle="pill" href="#v-pills-teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false">Add Teacher</a>
           <a class="nav-link" id="v-pills-student-tab" data-toggle="pill" href="#v-pills-student" role="tab" aria-controls="v-pills-student" aria-selected="false">Add Student</a>
           <a class="nav-link" id="v-pills-driver-tab" data-toggle="pill" href="#v-pills-driver" role="tab" aria-controls="v-pills-driver" aria-selected="false">Add Driver</a>
           <a class="nav-link" id="v-pills-parent-tab" data-toggle="pill" href="#v-pills-parent" role="tab" aria-controls="v-pills-parent" aria-selected="false">Add Parent</a>
-
+          
         </div>
       </div>
       <div class="col-9">
@@ -81,16 +102,7 @@ $(function(){
                   <input type="text" name="class_name" id="class_name" class="class_name col-2">
                 </div>
               
-                <div class="form-row">
-                  <label class="col-2">section</label>
-                  <input type="text" name="section" id="section" class="class_name col-2">
-                </div>
-
-                <div class="form-row">
-                  <label class="col-2">number of student</label>
-                  <input type="text" name="num_of_stud" id="num_of_student" class="class_name col-2">
-                </div>
-                
+    
                 <div class="form">
                   <input type="submit" class="btn btn-primary" value="add class">
                 </div>
@@ -100,6 +112,34 @@ $(function(){
              <!-- end class-->
 
           </div>
+          <!--start add section-->
+          <div class="tab-pane fade show" id="v-pills-section" role="tabpanel" aria-labelledby="v-pills-section-tab">Add Section
+            <form action="../PHP_CODE/section.php" method="post">
+               <div class="form-row">
+                  <label class="col-2">Section Name</label>
+                  <input type="text" name="section_name" id="section" class="class_name col-2">
+                </div>
+                <div class="form-row">
+                  <label class="col-2">Number of student</label>
+               
+                  <input type="text" name="num_of_stud" id="num_of_student" class="class_name col-2">
+                </div>
+                <div class="form-row">
+                  <label class="col-2">Class</label>
+                  <select>
+                  <?php
+                     while($row=mysqli_fetch_array($conn))
+                  ?>
+                  <option value="<?php echo $row['class_id']; ?>"><?php echo 'a;sldka;sldk'; ?></option>
+                  </select>
+                </div>
+
+                <div class="form">
+                  <input type="submit" class="btn btn-primary" value="add section">
+                </div>
+            </form>
+          </div>
+          <!-- end add section-->
           <div class="tab-pane fade" id="v-pills-teacher" role="tabpanel" aria-labelledby="v-pills-teacher-tab">
             <!-- start Teacher-->
             <div class="bg-contact2" style="background-image:url('../image/bg-01.jpg');">
@@ -247,17 +287,16 @@ $(function(){
                     <input type="text" class="form-control" name="std_mobile" onkeypress="javascript:return isNumber(event)" id="validationTooltip15" maxlength="10" required>
                     <div class="invalid-tooltip" style="position: relative;">Plase Enter Mobile</div>
                        <br>
-                    <label for="">Class</label>
-                    <select name="std_class" id="std_class">
-                      <option value="1">class 1</option>
-                      <option value="2">class 2</option>
-                    </select>
+                    <label>Class</label>
+                      <select id="std_class" name="std_class">
+                        <option selected disabled>Select Class</option>
+                      <?php foreach($result_class1 as $class){
+                        echo'<option value='.$class['class_id'].'>'.$class['class_name'].'</option>';
+                      }?>
+                      </select>
                     <br>
                     <label>Section</label>
-                    <select name="std_section" id="">
-                      <option value="1">section 1</option>
-                      <option value="2">section 2</option>
-                    </select>
+                    <select name="std_section" id="std_section"></select>
                     <br>
                     <label>Password</label>
                      <input type="password" name="student_password" id="student_password" maxlength="10">
@@ -273,7 +312,7 @@ $(function(){
           <div class="right"></div>
         </div>
       
-            <!-- End Add student-->  
+      <!-- End Add student-->  
 
           </div>
           <div class="tab-pane fade" id="v-pills-driver" role="tabpanel" aria-labelledby="v-pills-driver-tab">
@@ -281,7 +320,7 @@ $(function(){
             <!-- Add Driver-->
             <div class="login-wrap login-body">
              	<div class="login-html">
-               <form action="../PHP_CODE/Driver.php" method="post">
+               <form action="../PHP_CODE/Driver.php" method="post" class="needs-validation" novalidate>
                     <input id="tab-2" type="radio" name="tab" class="sign-up">
                      <label for="tab-2" class="tab">Add Driver</label>
                   
@@ -290,33 +329,38 @@ $(function(){
                       <div class="sign-up-htm">
                         <div class="group">
                           <label for="firstname" class="label">First Name</label>
-                          <input id="validationCustom01" name="firstname" type="text" class="input" required>
-                          <div class="invalid-feedback">Please First Name</div>
+                          <input id="validationtooltip17" name="firstname" type="text" class="input" required>
+                          <div class="invalid-tooltip position-relative">Please First Name</div>
                         </div>
-                        <br>
+                         
                         <div class="group">
                           <label for="mid_name" class="label">Middle Name</label>
-                          <input id="mid_name" name="mid_name" type="text" class="input" required>
-                          <div class="invalid-tooltip">Please First Name</div>
+                          <input id="validationtooltip18" name="mid_name" type="text" class="input" required>
+                          <div class="invalid-tooltip position-relative">Please Enter Mid Name</div>
 
                         </div>
                         <div class="group">
                           <label for="last_name" class="label">Last Name</label>
-                          <input id="last_name" name="last_name" type="text" class="input">
+                          <input id="validationtooltip19" name="last_name" type="text" class="input" required>
+                          <div class="invalid-tooltip position-relative">Please Enter Last Name</div>
                         </div>
                         <div class="group">
                           <label for="phone" class="label">Phone Number</label>
-                          <input id="phone"  name="phone" type="text" onkeypress="return isNumber(event)" class="input" maxlength="10">
+                          <input id="validationtooltip20" name="phone" type="text" onkeypress="return isNumber(event)" class="input" maxlength="10" required>
+                          <div class="invalid-tooltip position-relative">Please Enter Phone number</div>
+
                         </div>
 
                         <div class="group">
                           <label for="bus_number" class="label">Bus Number</label>
-                          <input id="bus" name="bus" type="text" class="input">
+                          <input id="validationtooltip21" name="bus" type="text" class="input" required>
+                          <div class="invalid-tooltip position-relative">Please Enter Phone number</div>
                         </div>
 
                         <div class="group">
                           <label for="area" class="label">Area</label>
-                          <input id="area" name="area" type="text" class="input">
+                          <input id="validationtooltip22" name="area" type="text" class="input" required>
+                          <div class="invalid-tooltip position-relative">Please Enter Phone number</div>
                         </div>
 
 
@@ -344,75 +388,81 @@ $(function(){
                         <div class="card card-1">
                             <div class="card-heading"></div>
                             <div class="card-body">
-                               <h2 class="title">Registration Info</h2>
-                               <form method="POST">
+                               <h2 class="title">Add Parent</h2>
+                               <form action="../PHP_CODE/Parent.php" method="POST" class="validate-form needs-validation" novalidate>
                                   <div class="input-group">
-                                      <input class="input--style-1" type="text" placeholder="NAME" name="name">
+                                      <input class="input--style-1" type="text" placeholder="Enter First Name" name="parent_first_name" id="validationtooltip23" required>
+                                      <div class="invalid-tooltip">Please Enter First Name</div>
                                    </div>
+                                   <div class="input-group">
+                                      <input class="input--style-1" type="text" placeholder="Enter Second Name" name="parent_second_name" id="validationtooltip24" required>
+                                      <div class="invalid-tooltip">Please Enter Second Name</div>
+                                   </div>
+                                   <div class="input-group">
+                                      <input class="input--style-1" type="text" placeholder="Enter Third Name" name="parent_third_name" id="validationtooltip25" required >
+                                      <div class="invalid-tooltip">Please Enter Third Name</div>
+                                   </div>
+                                   <div class="input-group">
+                                      <input class="input--style-1" type="text" placeholder="Enter Family Name" name="parent_family_name" id="validationtooltip26" required>
+                                      <div class="invalid-tooltip">Please Enter Family Name</div>
+                                   </div>
+                                   <div class="input-group">
+                                       <input class="input--style-1" type="text" placeholder="Enter phone Number" onkeypress="return isNumber(event)" maxlength="10" name="parent_phone">
+                                   </div>
+                                   <!-- begin row space-->
+                                  
                                    <div class="row row-space">
                                       <div class="col-2">
+                                         <div class="input-group">
+                                           <div class="rs-select2 js-select-simple select--no-search">
+                                                    <!-- read from table student-->
+                                                  <select name="student_id" id="student_id">
+                                                     <option disabled>select student</option>
+                                                     <?php
+                                                       foreach ($result as $row) 
+                                                       {
+                                                      ?>
+                                                      <option value="<?php echo $row['student_id']; ?>"><?php echo $row['student_id']; } ?></option>
+                                                  </select>
+                                                  <div class="select-dropdown"></div>
+                                           </div>
+                                           
+                                         </div>
                                       </div>
+                                      
                                    </div>
+                                   <!-- end row space-->
+                                   <!-- Email-->
+                                   <div class="input-group">
+                                   <input class="input--style-1" type="email" placeholder="Enter Email" name="parent_email">
+
+                                   </div>
+                                   <div class="input-group">
+                                      <input class="input--style-1" type="password" placeholder="Enter Passsword" name="parent_password"> 
+                                    </div>
+
+                                  
+                                    <div class="p-t-20">
+                                        <button class="btn btn--radius btn--green" type="submit">Add Parent</button>
+                                    </div>
+
                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
              
-  
-             
+          </div>
+          <!-- end region add parnet-->
+
+        </div>
+          
         </div>
       
     </div>
   </div>
 <!-- #End region Manager -->
 
-  <div class="tab-pane fade" id="teacher" role="tabpanel" aria-labelledby="teacher-tab">Teacher
-    <!-- start Teacher Tab-->
-    <p>Add homework to class</p><br>
-    <p>Reach to all class and</p>
-
-    <!-- end Teacher Tab-->
-
-  </div>
-  <div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">student
-    <!-- start student Tab-->
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Course Name</th>
-      <th scope="col">First/25</th>
-      <th scope="col">Second/25</th>
-      <th scope="col">Final/50</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Math</th>
-      <td>25</td>
-      <td>25</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <th scope="row">English</th>
-      <td>15</td>
-      <td>30</td>
-      <td>45</td>
-    </tr>
-    <tr>
-      <th scope="row">Science</th>
-      <td>24</td>
-      <td>20</td>
-      <td>35</td>
-    </tr>
-  </tbody>
-</table>
-
-   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1745896.4671946412!2d36.0014957928257!3d31.27736655702831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15006f476664de99%3A0x8d285b0751264e99!2sJordan!5e0!3m2!1sen!2sjo!4v1588191325101!5m2!1sen!2sjo" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-  </div>
-</div>
-
-    <!-- end student tab-->
 
 
 
@@ -426,8 +476,20 @@ $(function(){
 
 
 </body>
+  <!-- Main JS-->
+
+    
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <!-- Jquery JS-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="../vendor/select2/select2.min.js"></script>
+    <script src="../vendor/datepicker/moment.min.js"></script>
+    <script src="../vendor/datepicker/daterangepicker.js"></script>
+
+  
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -457,4 +519,5 @@ function isNumber(evt) {
         return true;
     }    
 </script> 
+<script src="../js/student.js"></script>
 </html>

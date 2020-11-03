@@ -27,7 +27,18 @@ class Manager
     private $ClassName;
     private $Section;
     Private $Number_of_Student;
+    private $Section_name;
 
+
+    public function getSectionName()
+    {
+        return $this->Section_name;
+    }
+
+    public function SetSectionName($SectionName)
+    {
+        $this->Section_name=$SectionName;
+    }
 
 
     
@@ -119,17 +130,16 @@ class Manager
       $this->dr_area=$area;
     }
 
-    public function AddClass($ClassName,$section,$Number_of_Student)
+    public function AddClass($ClassName)
     {
              
-            if(isset($ClassName)&&isset($section)&&isset($Number_of_Student))
+            if(isset($ClassName))
             {
-                if($Number_of_Student>0)
-                {
+               
                     try
                     {
                        global $conn;
-                        $sql = "INSERT INTO class(class_name,section,number_of_student)VALUES ('$ClassName','$section','$Number_of_Student')";
+                        $sql = "INSERT INTO class(class_name)VALUES ('$ClassName')";
            
                         $conn->exec($sql);
                       
@@ -143,12 +153,39 @@ class Manager
                    $conn = null;
                
                  return header('Location:../Pages/Admin.php')."Class  Added successfully";            
-                }
-                else
-                {
-                     return "Number of student must be greater than 0";
-                }
-                
+            }
+            else
+            {
+                echo  "<p>Please fill the field info</p>";
+            }
+    
+
+    }
+
+    public function AddSection($SectionName,$Number_of_Student,$ClassName)
+    {
+       
+             
+            if(isset($SectionName)&&isset($Number_of_Student)&&isset($ClassName))
+            {
+               
+                    try
+                    {
+                       global $conn;
+                        $sql = "INSERT INTO section(section_name,number_of_student,class_id)VALUES ('$SectionName','$Number_of_Student','$ClassName')";
+           
+                        $conn->exec($sql);
+                      
+                    // use exec() because no results are returne
+                   }
+                   catch(PDOException $e) 
+                    {
+                      echo $sql . "<br>" . $e->getMessage();
+                    }
+             
+                   $conn = null;
+               
+                 return header('Location:../Pages/Admin.php')."Class  Added successfully";            
             }
             else
             {
@@ -343,6 +380,26 @@ class Manager
       
       $conn = null;
     
+    }
+
+    //Add Parent
+    public function AddParent($parent_fn,$parent_sn,$parent_th_name,$parent_family_name,$parent_phone_number,$email,$parent_password,$student_id)
+    {
+
+        try
+        {
+             global $conn;
+             $hash_parent_password=md5($parent_password);
+             $sql_add_parent="insert into parent(parent_first_name,parent_second_name,parent_third_name,parent_family_name,parent_phone_number,email,password,password_text, student_id)
+             values('$parent_fn','$parent_sn','$parent_th_name','$parent_family_name','$parent_phone_number','$email','$hash_parent_password','$parent_password','$student_id')";
+
+             $conn->exec($sql_add_parent);
+        }
+        catch(PDOException $e)
+        {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn=null;
     }
     
 }

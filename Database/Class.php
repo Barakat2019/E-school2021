@@ -6,9 +6,7 @@ try
     //Create Table Class
     $sql="create table class(
         class_id int(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        class_name varchar(255),
-        section varchar(255),
-        number_of_student integer
+        class_name varchar(255)
     )";
     
     // use exec() because no results are returned
