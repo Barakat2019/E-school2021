@@ -303,7 +303,7 @@ class Manager
                 $result=$rows->fetchAll();
 
                 $result1=$result[0]['maxnumber']+1;
-                
+               
                 if(is_numeric($phone_number))
                 {
                     $value_phone_number=$phone_number;
@@ -314,18 +314,19 @@ class Manager
                 }
                 $hash_std_pass=md5($password);
 
-               
+               $firstname_new='st_'.$firstname.$phone_number;
+              
                 $sql_insert_student = "INSERT INTO student(student_id,first_name,second_name,third_name,family_name,gender,date_of_birth,nationality,email,area,phone_number,class_id,section,password,password_text)VALUES 
-                ('$result1','$firstname','$secondname','$thirdname','$familyname','$gender','$dob','$nationality','$email','$area','$value_phone_number','$class_id','$section','$hash_std_pass','$password');";
+                ('$result1','$firstname_new','$secondname','$thirdname','$familyname','$gender','$dob','$nationality','$email','$area','$value_phone_number','$class_id','$section','$hash_std_pass','$password');";
 
-              $conn->exec($sql_insert_student);
+                $conn->exec($sql_insert_student);
                 
                 
                 
              }
              catch(PDOException $e) 
              {
-                 echo "Not pass";
+                 echo "Not pass".$e;
              }
           
              return header('Location:../Pages/Admin.php')."Student  Added successfully";
@@ -347,9 +348,10 @@ class Manager
             $result1=$result[0]['maxnumber']+1;
             $hash_tech_pass=md5($teacher_password);
 
+            $teacher_firstname_new='th_'.$teacher_first_name;
             //Add Teacher
             $sql_insert_teacher="INSERT INTO teacher(teacher_id,first_name,second_name,third_name,family_name,gender,date_of_birth,email,phone_number,password,password_text)VALUES 
-            ('$result1','$teacher_first_name','$teacher_sec_name','$teacher_third_name','$teacher_family_name','$teacher_gender','$teacher_dob','$teacher_email','$teacher_phone_number','$hash_tech_pass','$teacher_password');";
+            ('$result1','$teacher_firstname_new','$teacher_sec_name','$teacher_third_name','$teacher_family_name','$teacher_gender','$teacher_dob','$teacher_email','$teacher_phone_number','$hash_tech_pass','$teacher_password');";
             $conn->exec($sql_insert_teacher);
 
         }

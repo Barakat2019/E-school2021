@@ -11,10 +11,6 @@ $result=$conn->query($select_student);
 $select_class="select class_id,class_name from class";
 $result_class1=$conn->query($select_class);
 
-
-
-
-
 ?>
  <!DOCTYPE html>
 <html lang="en">
@@ -130,7 +126,7 @@ $(function(){
                   <?php
                      while($row=mysqli_fetch_array($conn))
                   ?>
-                  <option value="<?php echo $row['class_id']; ?>"><?php echo 'a;sldka;sldk'; ?></option>
+                  <option value="<?php echo $row['class_id']; ?>"><?php echo $row['class_id']; ?></option>
                   </select>
                 </div>
 
@@ -291,7 +287,7 @@ $(function(){
                       <select id="std_class" name="std_class">
                         <option selected disabled>Select Class</option>
                       <?php foreach($result_class1 as $class){
-                        echo'<option value='.$class['class_id'].'>'.$class['class_name'].'</option>';
+                        echo'<option value='.$class['class_id'].'>'.$class['class_id'].'</option>';
                       }?>
                       </select>
                     <br>

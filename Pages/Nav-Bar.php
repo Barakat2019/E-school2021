@@ -21,16 +21,27 @@
         </form>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
-	        	<li class="nav-item active"><a href="home.php" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item"><a href="" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="Admin.php" class="nav-link">Manager</a></li>
-	        	<li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
-	        	<li class="nav-item"><a href="" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
+	        	<li class="nav-item"><a href="home.php" class="nav-link pl-0" aria-selected="true">Home</a></li>
+	        	<li class="nav-item"><a href="" class="nav-link" aria-selected="false">About</a></li>
+	        	<li class="nav-item"><a href="Admin.php" class="nav-link" aria-selected="false">Manager</a></li>
+	        	<li class="nav-item"><a href="login.php" class="nav-link" aria-selected="false">Login</a></li>
+	        	<li class="nav-item"><a href="" class="nav-link" aria-selected="false">Blog</a></li>
+	          <li class="nav-item"><a href="" class="nav-link" aria-selected="false">Contact</a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
 
 </body>
+<script src="../js/jquery/jquery.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		  $('ul li a').click(function(){
+    	  	 $('li a').removeClass("active1");
+    		 $(this).addClass("active1");
+			});
+		});
+
+</script>
 </html>

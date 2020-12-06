@@ -131,6 +131,15 @@ h4 input[type="checkbox"] {
 
 .ftco-navbar-light
 {
-    top:-30px;
+    top:0px;
     position: relative;
+}
+
+a:active
+{
+    background-color: red;
+}
+a:focus {
+    color:blue;
+    outline: none;
 }

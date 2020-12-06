@@ -9867,3 +9867,10 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+/*style nav active*/
+.active1{
+  background-color:#d90000;
+  color:#fff;
+
+}

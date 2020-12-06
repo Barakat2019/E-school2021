@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     $('#std_class').change(function(){
         var std_class_id=$('#std_class').val();
