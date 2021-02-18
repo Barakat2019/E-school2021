@@ -1,6 +1,7 @@
 <?php
 require_once('../PHP_CODE/Manager.php');
 include_once('../Pages/Nav-Bar.php');
+
  
 //Add student id to select
 global $conn;
@@ -10,6 +11,12 @@ $result=$conn->query($select_student);
 //This for class  in Add sction tab
 $select_class="select class_id,class_name from class";
 $result_class1=$conn->query($select_class);
+/*
+foreach($result_class1 as $r)
+{
+  echo $r[0];
+}
+*/
 
 ?>
  <!DOCTYPE html>
@@ -123,10 +130,8 @@ $(function(){
                 <div class="form-row">
                   <label class="col-2">Class</label>
                   <select>
-                  <?php
-                     while($row=mysqli_fetch_array($conn))
-                  ?>
-                  <option value="<?php echo $row['class_id']; ?>"><?php echo $row['class_id']; ?></option>
+                  <?php foreach($result_class1 as $r){?>
+                  <option value="<?php  echo $r[0]; ?>"><?php echo $r[0];}?></option>
                   </select>
                 </div>
 

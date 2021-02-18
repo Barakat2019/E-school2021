@@ -7,7 +7,9 @@ try
     //Create Table Teacher
     $sql="create table users(
         username varchar(255) PRIMARY KEY,
-        password varchar(255)
+        password varchar(255),
+        role_id int,
+        FOREIGN KEY(role_id) REFERENCES Roles(role_id)
     )";
     
     // use exec() because no results are returned

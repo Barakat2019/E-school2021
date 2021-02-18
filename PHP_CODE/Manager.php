@@ -313,8 +313,9 @@ class Manager
                      header('location:http://localhost/E-School/PHP_CODE/Student.php?message=invalid phone number');
                 }
                 $hash_std_pass=md5($password);
+               
 
-               $firstname_new='st_'.$firstname.$phone_number;
+               $firstname_new='st_'.$firstname;
               
                 $sql_insert_student = "INSERT INTO student(student_id,first_name,second_name,third_name,family_name,gender,date_of_birth,nationality,email,area,phone_number,class_id,section,password,password_text)VALUES 
                 ('$result1','$firstname_new','$secondname','$thirdname','$familyname','$gender','$dob','$nationality','$email','$area','$value_phone_number','$class_id','$section','$hash_std_pass','$password');";
@@ -391,9 +392,24 @@ class Manager
         try
         {
              global $conn;
+             $query="select max(parent_id) as `maxnumber` from `parent`";
+             $rows=$conn->query($query);
+             $result=$rows->fetchAll();
+
+             $result1=$result[0]['maxnumber']+1;
+
+             if(is_numeric($parent_phone_number))
+             {
+                 $value_phone_number=$parent_phone_number;
+             }
+             else
+             {
+                  header('location:http://localhost/E-School/PHP_CODE/Parent.php?message=invalid phone number');
+             }
              $hash_parent_password=md5($parent_password);
+             $parent_first_name_new='pa_'.$parent_fn;
              $sql_add_parent="insert into parent(parent_first_name,parent_second_name,parent_third_name,parent_family_name,parent_phone_number,email,password,password_text, student_id)
-             values('$parent_fn','$parent_sn','$parent_th_name','$parent_family_name','$parent_phone_number','$email','$hash_parent_password','$parent_password','$student_id')";
+             values('$parent_first_name_new','$parent_sn','$parent_th_name','$parent_family_name','$parent_phone_number','$email','$hash_parent_password','$parent_password','$student_id')";
 
              $conn->exec($sql_add_parent);
         }
@@ -401,7 +417,7 @@ class Manager
         {
             echo $sql . "<br>" . $e->getMessage();
         }
-        $conn=null;
+        return header('Location:../Pages/Admin.php',"Parent  Added successfully");
     }
     
 }
